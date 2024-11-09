@@ -10,9 +10,9 @@ import Home from './pages/Home';
 function App() {
   return (
     <BrowserRouter>
-      <header>
-        <Link to='/'>#Vanlife</Link>
-        <nav><Link to='/about'>About</Link></nav>
+      <header className='bg-amber-50 flex justify-between items-center p-2'>
+        <Link className='text-xl font-extrabold' to='/'>#VANLIFE</Link>
+        <nav className='text-sm font-medium'><Link to='/about'>About</Link></nav>
       </header>
       <Routes>
         <Route path='/' element={<Home />} />
