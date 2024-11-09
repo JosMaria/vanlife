@@ -10,7 +10,7 @@ import Home from './pages/Home';
 function App() {
   return (
     <BrowserRouter>
-      <header className='bg-amber-50 flex justify-between items-center p-2'>
+      <header className='bg-amber-50 flex justify-between items-center px-2 py-4'>
         <Link className='text-xl font-extrabold' to='/'>#VANLIFE</Link>
         <nav className='text-sm font-medium'><Link to='/about'>About</Link></nav>
       </header>

@@ -4,7 +4,7 @@ import bgImg from '../assets/images/about-hero.png';
 
 export default function About() {
   return (
-    <div className='bg-amber-50'>
+    <div className='bg-amber-50 py-1'>
       <img src={bgImg} className='about-hero-image' />
       <div className='flex flex-col gap-5 mx-2 my-5 text-sm font-medium'>
         <h1 className='text-xl font-bold leading-tight'>Don't squeeze in a sedan when you could relax in a van.</h1>
