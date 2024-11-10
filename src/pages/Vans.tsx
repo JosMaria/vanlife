@@ -1,13 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-type VanType = {
-  id: string;
-  name: string;
-  price: number;
-  description: string;
-  imageUrl: string;
-  type: "simple" | "rugged" | "luxury";
-}
+import { VanType } from '../types';
 
 export default function Vans() {
   const [vans, setVans] = React.useState<VanType[]>([]);
@@ -18,13 +12,14 @@ export default function Vans() {
       .then((data: { vans: VanType[] }) => setVans(data.vans));
   }, []);
 
-
   const vansElements = vans.map(van => (
-    <div className='bg-orange-100 max-w-32 p-1.5 flex flex-col gap-1 leading-tight text-sm' key={van.id}>
-      <img src={van.imageUrl} alt={van.name} />
-      <h3 className='font-bold'>{van.name}</h3>
-      <p className='font-bold'>${van.price}<span className='font-normal'>/day</span></p>
-      <i className={`${van.type === 'simple' ? 'bg-orange-600' : van.type === 'rugged' ? 'bg-emerald-600' : 'bg-slate-700'} font-semibold text-white w-fit px-3 py-1 rounded-sm`}>{van.type}</i>
+    <div className='bg-orange-100 max-w-32 p-1.5 leading-tight text-sm' key={van.id}>
+      <Link to={`/vans/${van.id}`} className='flex flex-col gap-1'>
+        <img src={van.imageUrl} alt={van.name} />
+        <h3 className='font-bold'>{van.name}</h3>
+        <p className='font-bold'>${van.price}<span className='font-normal'>/day</span></p>
+        <p className={`${van.type === 'simple' ? 'bg-orange-500' : van.type === 'rugged' ? 'bg-emerald-600' : 'bg-slate-600'} font-semibold text-white w-fit px-3 py-1 rounded-sm`}>{van.type}</p>
+      </Link>
     </div>
   ));
 
