@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { VanType } from '../types';
+import { VanType } from '../../types';
 
 export default function Vans() {
   const [vans, setVans] = React.useState<VanType[]>([]);

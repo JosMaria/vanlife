@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { VanType } from '../types';
+import { VanType } from '../../types';
 
 export default function VanDetail() {
   const params = useParams();
