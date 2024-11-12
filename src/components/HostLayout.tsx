@@ -9,7 +9,7 @@ const activeStyles = {
 export default function HostLayout() {
   return (
     <>
-      <nav className='flex gap-5 text-sm font-medium p-2'>
+      <nav className='flex gap-5 text-sm font-medium p-1'>
         <NavLink
           to='.'
           end
