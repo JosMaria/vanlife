@@ -1,4 +1,4 @@
-import { useVanInfo } from "./hooks/useVanInfo"
+import { useVanInfo } from './hooks/useVanInfo';
 
 export default function HostVanInfo() {
   const { name, category, description } = useVanInfo();
