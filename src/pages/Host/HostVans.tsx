@@ -1,7 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { VanType } from '../../types';
-import { Link } from 'react-router-dom';
 
 type CardType = Pick<VanType, 'id' | 'imageUrl' | 'name' | 'price'>
 
@@ -15,10 +15,10 @@ export default function HostVans() {
   }, []);
 
   const hostVansEls = vans.map(van => (
-    <Link 
-      className='flex items-center gap-3 p-1 bg-white' 
+    <Link
+      className='flex items-center gap-3 p-1 bg-white'
       key={van.id}
-      to={`/host/vans/${van.id}`}
+      to={van.id}
     >
       <img className='w-20 rounded' src={van.imageUrl} alt={van.name} />
       <div>
@@ -31,12 +31,11 @@ export default function HostVans() {
   return (
     <section className='p-2 flex flex-col gap-3'>
       <h1 className='font-bold text-xl leading-none'>Your listed vans</h1>
-        {vans.length > 0 ?
-(          <div className='flex flex-col gap-5'>
-            {hostVansEls}
-          </div>
-        ) : <h2>Loading...</h2>
-        }
+      {vans.length > 0 ? (
+        <div className='flex flex-col gap-5'>
+          {hostVansEls}
+        </div>
+      ) : <h2>Loading...</h2>}
     </section>
   );
 }
