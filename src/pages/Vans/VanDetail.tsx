@@ -24,7 +24,7 @@ export default function VanDetail() {
       >
         <span className='text-xl font-bold leading-none'>&larr;</span>
         <span className='text-sm font-medium underline active:text-slate-600'>
-          Back all vans
+          Back to {state?.type || 'all'} vans
         </span>
       </Link>
       {van ? (

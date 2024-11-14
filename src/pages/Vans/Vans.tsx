@@ -19,10 +19,10 @@ export default function Vans() {
 
   const vansElements = displayedVans.map(van => (
     <div className='bg-orange-100 p-1.5 leading-tight text-sm' key={van.id}>
-      <Link 
-        className='flex flex-col gap-1' 
+      <Link
+        className='flex flex-col gap-1'
         to={van.id}
-        state={{ search: `?${searchParams.toString()}` }}
+        state={{ search: `?${searchParams.toString()}`, type: typeFilter }}
       >
         <img src={van.imageUrl} alt={van.name} width={130} />
         <h3 className='font-bold'>{van.name}</h3>
@@ -74,7 +74,7 @@ export default function Vans() {
           </button>
         )}
       </div>
-      <section className='w-full flex flex-wrap justify-between gap-5'>
+      <section className='w-full flex flex-wrap justify-evenly gap-5 p-2'>
         {vansElements}
       </section>
     </div>

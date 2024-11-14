@@ -13,7 +13,7 @@ export default function About() {
       </div>
       <div className='bg-orange-300 p-2 mx-2 flex flex-col gap-2'>
         <h2 className='font-bold text-lg'>Your destination is waiting.<br />Your van is ready.</h2>
-        <Link className='bg-black text-white px-5 py-2 font-semibold w-fit rounded-md' to='/vans'>Explore our vans</Link>
+        <Link className='bg-black text-white px-5 py-2 font-semibold w-fit rounded text-nowrap' to='/vans'>Explore our vans</Link>
       </div>
     </div>
   );
