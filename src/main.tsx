@@ -17,6 +17,7 @@ import HostVanPricing from './pages/Host/HostVanPricing';
 import HostVans from './pages/Host/HostVans';
 import Income from './pages/Host/Income';
 import Reviews from './pages/Host/Reviews';
+import NotFound from './pages/NotFound';
 import VanDetail from './pages/Vans/VanDetail';
 import Vans from './pages/Vans/Vans';
 
@@ -40,6 +41,7 @@ function App() {
             </Route>
             <Route path='reviews' element={<Reviews />} />
           </Route>
+          <Route path='*' element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>
