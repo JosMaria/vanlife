@@ -1,18 +1,40 @@
 import React from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
+import { getVans } from '../../api';
 import { VanType } from '../../types';
+
+type ErrorType = {
+  message: string;
+  statusText: string;
+  status: number;
+};
 
 export default function Vans() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [vans, setVans] = React.useState<VanType[]>([]);
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState<ErrorType | null>(null);
 
   const typeFilter = searchParams.get('type');
 
   React.useEffect(() => {
-    fetch('/api/vans')
-      .then(res => res.json())
-      .then((data: { vans: VanType[] }) => setVans(data.vans));
+    async function loadVans() {
+      setLoading(true);
+
+      try {
+        const vansObtained = await getVans();
+        setVans(vansObtained);
+
+      } catch (err) {
+        setError(err as ErrorType);
+
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadVans();
   }, []);
 
   const displayedVans = typeFilter ? vans.filter(van => van.type === typeFilter.toLowerCase()) : vans;
@@ -24,7 +46,7 @@ export default function Vans() {
         to={van.id}
         state={{ search: `?${searchParams.toString()}`, type: typeFilter }}
       >
-        <img src={van.imageUrl} alt={van.name} width={130} />
+        <img src={van.imageUrl} alt={van.name} width={120} />
         <h3 className='font-bold'>{van.name}</h3>
         <p className='font-bold'>${van.price}<span className='font-normal'>/day</span></p>
         <p className={`${van.type === 'simple' ? 'bg-orange-500' : van.type === 'rugged' ? 'bg-emerald-600' : 'bg-slate-600'} font-semibold text-white w-fit px-2 py-0.5 rounded-sm text-xs`}>{van.type}</p>
@@ -41,6 +63,14 @@ export default function Vans() {
       }
       return prevParams;
     });
+  }
+
+  if (loading) {
+    return <h1>Loading...</h1>
+  }
+
+  if (error) {
+    return <h1>There was an error: {error.message}</h1>
   }
 
   return (
