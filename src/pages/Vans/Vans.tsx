@@ -19,7 +19,11 @@ export default function Vans() {
 
   const vansElements = displayedVans.map(van => (
     <div className='bg-orange-100 p-1.5 leading-tight text-sm' key={van.id}>
-      <Link to={van.id} className='flex flex-col gap-1'>
+      <Link 
+        className='flex flex-col gap-1' 
+        to={van.id}
+        state={{ search: `?${searchParams.toString()}` }}
+      >
         <img src={van.imageUrl} alt={van.name} width={130} />
         <h3 className='font-bold'>{van.name}</h3>
         <p className='font-bold'>${van.price}<span className='font-normal'>/day</span></p>
