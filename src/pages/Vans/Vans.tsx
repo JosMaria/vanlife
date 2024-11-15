@@ -1,41 +1,17 @@
-import React from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useLoaderData, useSearchParams } from 'react-router-dom';
 
 import { getVans } from '../../api';
 import { VanType } from '../../types';
 
-type ErrorType = {
-  message: string;
-  statusText: string;
-  status: number;
-};
+export function loader() {
+  return getVans();
+}
 
 export default function Vans() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [vans, setVans] = React.useState<VanType[]>([]);
-  const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState<ErrorType | null>(null);
+  const vans = useLoaderData() as VanType[];
 
   const typeFilter = searchParams.get('type');
-
-  React.useEffect(() => {
-    async function loadVans() {
-      setLoading(true);
-
-      try {
-        const vansObtained = await getVans();
-        setVans(vansObtained);
-
-      } catch (err) {
-        setError(err as ErrorType);
-
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    loadVans();
-  }, []);
 
   const displayedVans = typeFilter ? vans.filter(van => van.type === typeFilter.toLowerCase()) : vans;
 
@@ -63,14 +39,6 @@ export default function Vans() {
       }
       return prevParams;
     });
-  }
-
-  if (loading) {
-    return <h1>Loading...</h1>
-  }
-
-  if (error) {
-    return <h1>There was an error: {error.message}</h1>
   }
 
   return (
