@@ -23,11 +23,13 @@ import Reviews from './pages/Host/Reviews';
 import NotFound from './pages/NotFound';
 import VanDetail from './pages/Vans/VanDetail';
 import Vans, { loader as vansPageLoader } from './pages/Vans/Vans';
+import Login from './pages/Login';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<Layout />}>
       <Route index element={<Home />} />
+      <Route path='login' element={<Login />} />
       <Route path='about' element={<About />} />
       <Route path='vans' element={<Vans />} loader={vansPageLoader} errorElement={<Error />} />
       <Route path='vans/:id' element={<VanDetail />} />
