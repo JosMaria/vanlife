@@ -1,4 +1,4 @@
-import { createServer, Model, Response } from 'miragejs';
+import { createServer, Model } from 'miragejs';
 
 createServer({
   models: {
@@ -21,7 +21,7 @@ createServer({
 
     this.get("/vans", (schema: any) => {
       return schema.vans.all()
-      //return new Response(400, {}, { error: "Error fetching data" });
+      //return ne(400, {}, { error: "Error fetching data" });
     })
 
     this.get("/vans/:id", (schema: any, request) => {

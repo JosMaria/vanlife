@@ -13,7 +13,7 @@ import Layout from './components/Layout';
 import About from './pages/About';
 import Home from './pages/Home';
 import Dashboard from './pages/Host/Dashboard';
-import HostVanDetail from './pages/Host/HostVanDetail';
+import HostVanDetail, { loader as hostVansDetailLoader } from './pages/Host/HostVanDetail';
 import HostVanInfo from './pages/Host/HostVanInfo';
 import HostVanPhotos from './pages/Host/HostVanPhotos';
 import HostVanPricing from './pages/Host/HostVanPricing';
@@ -52,7 +52,12 @@ const router = createBrowserRouter(
           loader={hostVansLoader}
           errorElement={<Error />}
         />
-        <Route path='vans/:id' element={<HostVanDetail />} loader={async () => null}>
+        <Route
+          path='vans/:id' 
+          element={<HostVanDetail />} 
+          loader={hostVansDetailLoader}
+          errorElement={<Error />}
+        >
           <Route index element={<HostVanInfo />} loader={async () => null} />
           <Route path='pricing' element={<HostVanPricing />} loader={async () => null} />
           <Route path='photos' element={<HostVanPhotos />} loader={async () => null} />
