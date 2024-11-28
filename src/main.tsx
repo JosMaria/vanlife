@@ -24,13 +24,14 @@ import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 import VanDetail, { loader as vanDetailLoader } from './pages/Vans/VanDetail';
 import Vans, { loader as vansLoader } from './pages/Vans/Vans';
+import { requireAuth } from './utils';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<Layout />}>
       <Route index element={<Home />} />
-      <Route path='login' element={<Login />} />
       <Route path='about' element={<About />} />
+      <Route path='login' element={<Login />} />
       <Route
         path='vans'
         element={<Vans />}
@@ -44,17 +45,30 @@ const router = createBrowserRouter(
         errorElement={<Error />}
       />
       <Route path='host' element={<HostLayout />}>
-        <Route index element={<Dashboard />} loader={async () => null} />
-        <Route path='income' element={<Income />} loader={async () => null} />
+        <Route
+          index
+          element={<Dashboard />}
+          loader={async () => requireAuth()}
+        />
+        <Route
+          path='income'
+          element={<Income />}
+          loader={async () => await requireAuth()}
+        />
+        <Route
+          path='reviews'
+          element={<Reviews />}
+          loader={async () => requireAuth()}
+        />
         <Route
           path='vans'
           element={<HostVans />}
-          loader={hostVansLoader}
+          loader={async () => await hostVansLoader()}
           errorElement={<Error />}
         />
         <Route
-          path='vans/:id' 
-          element={<HostVanDetail />} 
+          path='vans/:id'
+          element={<HostVanDetail />}
           loader={hostVansDetailLoader}
           errorElement={<Error />}
         >
@@ -62,7 +76,6 @@ const router = createBrowserRouter(
           <Route path='pricing' element={<HostVanPricing />} loader={async () => null} />
           <Route path='photos' element={<HostVanPhotos />} loader={async () => null} />
         </Route>
-        <Route path='reviews' element={<Reviews />} loader={async () => null} />
       </Route>
       <Route path='*' element={<NotFound />} />
     </Route>

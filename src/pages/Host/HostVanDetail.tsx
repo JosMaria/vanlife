@@ -2,9 +2,11 @@ import { Link, LoaderFunctionArgs, NavLink, Outlet, useLoaderData } from 'react-
 
 import { getHostVans } from '../../api';
 import { VanType } from '../../types';
+import { requireAuth } from '../../utils';
 import { ContextType } from './types';
 
-export function loader({ params }: LoaderFunctionArgs) {
+export async function loader({ params }: LoaderFunctionArgs) {
+  await requireAuth();
   return getHostVans(params.id);
 }
 

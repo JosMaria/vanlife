@@ -2,8 +2,11 @@ import { Link, useLoaderData, useSearchParams } from 'react-router-dom';
 
 import { getVans } from '../../api';
 import { VanType } from '../../types';
+import { requireAuth } from '../../utils';
 
-export function loader() {
+export async function loader() {
+  await requireAuth();
+  console.log('llegue aqui')
   return getVans();
 }
 
