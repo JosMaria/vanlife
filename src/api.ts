@@ -19,3 +19,19 @@ export async function getVans(id: string | null = null) {
   const data: VansResponseType = await res.json();
   return data.vans;
 }
+
+export async function getHostVans(vanId: string | null = null) {
+  const url = vanId ? `/api/host/vans/${vanId}` : '/api/host/vans';
+  const res = await fetch(url);
+
+  if (!res.ok) {
+    throw {
+      message: 'Failed to fetch host vans',
+      statusText: res.statusText,
+      status: res.status,
+    };
+  }
+
+  const data: VansResponseType = await res.json();
+  return data.vans;
+}

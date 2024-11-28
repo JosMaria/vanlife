@@ -1,18 +1,14 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 
+import { getHostVans } from '../../api';
 import { VanType } from '../../types';
 
-type CardType = Pick<VanType, 'id' | 'imageUrl' | 'name' | 'price'>
+export function loader() {
+  return getHostVans();
+}
 
 export default function HostVans() {
-  const [vans, setVans] = React.useState<CardType[]>([]);
-
-  React.useEffect(() => {
-    fetch('/api/host/vans')
-      .then(res => res.json())
-      .then((data: { vans: CardType[] }) => setVans(data.vans));
-  }, []);
+  const vans = useLoaderData() as Pick<VanType, 'id' | 'imageUrl' | 'name' | 'price'>[];
 
   const hostVansEls = vans.map(van => (
     <Link
@@ -31,11 +27,9 @@ export default function HostVans() {
   return (
     <section className='p-2 flex flex-col gap-3'>
       <h1 className='font-bold text-xl leading-none'>Your listed vans</h1>
-      {vans.length > 0 ? (
-        <div className='flex flex-col gap-5'>
-          {hostVansEls}
-        </div>
-      ) : <h2>Loading...</h2>}
+      <div className='flex flex-col gap-5'>
+        {hostVansEls}
+      </div>
     </section>
   );
 }
