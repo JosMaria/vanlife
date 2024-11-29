@@ -5,9 +5,7 @@ import { VanType } from '../../types';
 import { requireAuth } from '../../utils';
 
 export async function loader() {
-  console.log('before required auth');
   await requireAuth();
-  console.log('after required auth');
   return getHostVans();
 }
 

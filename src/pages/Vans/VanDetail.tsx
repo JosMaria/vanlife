@@ -4,7 +4,6 @@ import { getVans } from '../../api';
 import { VanType } from '../../types';
 
 export function loader({ params }: LoaderFunctionArgs) {
-  console.log(params);
   return getVans(params.id);
 }
 

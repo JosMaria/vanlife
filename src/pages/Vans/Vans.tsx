@@ -6,7 +6,6 @@ import { requireAuth } from '../../utils';
 
 export async function loader() {
   await requireAuth();
-  console.log('llegue aqui')
   return getVans();
 }
 

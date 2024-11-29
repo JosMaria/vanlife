@@ -20,7 +20,7 @@ import HostVanPricing from './pages/Host/HostVanPricing';
 import HostVans, { loader as hostVansLoader } from './pages/Host/HostVans';
 import Income from './pages/Host/Income';
 import Reviews from './pages/Host/Reviews';
-import Login from './pages/Login';
+import Login, { loader as loginLoader } from './pages/Login';
 import NotFound from './pages/NotFound';
 import VanDetail, { loader as vanDetailLoader } from './pages/Vans/VanDetail';
 import Vans, { loader as vansLoader } from './pages/Vans/Vans';
@@ -31,7 +31,11 @@ const router = createBrowserRouter(
     <Route path='/' element={<Layout />}>
       <Route index element={<Home />} />
       <Route path='about' element={<About />} />
-      <Route path='login' element={<Login />} />
+      <Route 
+        path='login' 
+        element={<Login />} 
+        loader={loginLoader}
+      />
       <Route
         path='vans'
         element={<Vans />}
