@@ -20,7 +20,7 @@ import HostVanPricing from './pages/Host/HostVanPricing';
 import HostVans, { loader as hostVansLoader } from './pages/Host/HostVans';
 import Income from './pages/Host/Income';
 import Reviews from './pages/Host/Reviews';
-import Login, { loader as loginLoader, action as loginAction } from './pages/Login';
+import Login, { action as loginAction, loader as loginLoader } from './pages/Login';
 import NotFound from './pages/NotFound';
 import VanDetail, { loader as vanDetailLoader } from './pages/Vans/VanDetail';
 import Vans, { loader as vansLoader } from './pages/Vans/Vans';
@@ -31,9 +31,9 @@ const router = createBrowserRouter(
     <Route path='/' element={<Layout />}>
       <Route index element={<Home />} />
       <Route path='about' element={<About />} />
-      <Route 
-        path='login' 
-        element={<Login />} 
+      <Route
+        path='login'
+        element={<Login />}
         loader={loginLoader}
         action={loginAction}
       />
@@ -53,22 +53,22 @@ const router = createBrowserRouter(
         <Route
           index
           element={<Dashboard />}
-          loader={async () => requireAuth()}
+          loader={requireAuth}
         />
         <Route
           path='income'
           element={<Income />}
-          loader={async () => await requireAuth()}
+          loader={requireAuth}
         />
         <Route
           path='reviews'
           element={<Reviews />}
-          loader={async () => requireAuth()}
+          loader={requireAuth}
         />
         <Route
           path='vans'
           element={<HostVans />}
-          loader={async () => await hostVansLoader()}
+          loader={hostVansLoader}
           errorElement={<Error />}
         />
         <Route
@@ -88,8 +88,7 @@ const router = createBrowserRouter(
 );
 
 createRoot(document.getElementById('root')!).render(
-  <RouterProvider router={router} />
-  /*{<StrictMode>
+  <StrictMode>
     <RouterProvider router={router} />
-  </StrictMode> }*/,
+  </StrictMode>
 );

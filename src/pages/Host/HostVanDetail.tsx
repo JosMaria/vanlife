@@ -5,8 +5,9 @@ import { VanType } from '../../types';
 import { requireAuth } from '../../utils';
 import { ContextType } from './types';
 
-export async function loader({ params }: LoaderFunctionArgs) {
-  await requireAuth();
+export async function loader(loaderArgs: LoaderFunctionArgs) {
+  const { params } = loaderArgs;
+  await requireAuth(loaderArgs);
   return getHostVans(params.id);
 }
 
